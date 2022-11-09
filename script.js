@@ -19,6 +19,7 @@ window.XMLHttpRequest.prototype.open = function (method, URL) {
             try {
                 var data = JSON.parse(_this.responseText);
                 modify(data, "is_blue_verified", false);
+                modify(data, "ext_is_blue_verified", false);
                 Object.defineProperty(_this, 'responseText', {value: JSON.stringify(data)});
             } catch (e) {}
         }

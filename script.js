@@ -41,6 +41,13 @@ window.XMLHttpRequest.prototype.open = function (method, URL) {
         const notVerifiedIds = notActuallyVerifiedIds(
           data?.globalObjects?.users
         );
+        if (notVerifiedIds.length > 0 && data?.globalObjects?.tweets) {
+          for (const [tweetId, tweetObj] of Object.entries(data?.globalObjects?.tweets)) {
+            if (notVerifiedIds.includes(tweetObj?.user_id_str)) {
+              delete data?.globalObjects?.tweets[tweetId];
+            } 
+          }
+        }
         if (notVerifiedIds.length > 0 && data?.globalObjects?.notifications) {
           for (const [notificationId, notificationValue] of Object.entries(
             data?.globalObjects?.notifications
